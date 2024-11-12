@@ -3,7 +3,7 @@ import os
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from app.core.config import settings
 
 # Configure logging
@@ -31,6 +31,11 @@ if not os.path.exists(static_dir):
     os.makedirs(static_dir)
     logger.info(f"Created static directory at {static_dir}")
 
+# Health check endpoint must be defined before static file mounting
+@app.get("/health", response_class=JSONResponse)
+async def health_check():
+    return {"status": "healthy"}
+
 # Mount static files
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
@@ -56,7 +61,3 @@ async def root():
     except Exception as e:
         logger.error(f"Error in root endpoint: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
-
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy"}

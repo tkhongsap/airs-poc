@@ -11,6 +11,7 @@
     "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE",
     "numReplicas": 1,
-    "port": 8000
+    "port": 8000,
+    "healthcheckInterval": 30
   }
 } 
