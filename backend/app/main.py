@@ -25,6 +25,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Create static directory if it doesn't exist
+static_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static")
+if not os.path.exists(static_dir):
+    os.makedirs(static_dir)
+    # Create an empty index.html for development
+    index_path = os.path.join(static_dir, "index.html")
+    if not os.path.exists(index_path):
+        with open(index_path, "w") as f:
+            f.write("<html><body><h1>Development Mode</h1></body></html>")
+    logger.info(f"Created static directory at {static_dir}")
+
 # Health check endpoint must be defined before static file mounting
 @app.get("/health", response_class=JSONResponse)
 async def health_check():
@@ -51,14 +62,20 @@ async def api_root():
         logger.error(f"Error in root endpoint: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-# Create static directory if it doesn't exist
-static_dir = os.path.join(os.path.dirname(__file__), "..", "static")
-if not os.path.exists(static_dir):
-    os.makedirs(static_dir)
-    logger.info(f"Created static directory at {static_dir}")
-
 # Mount static files
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
-# Serve static files from root
-app.mount("/", StaticFiles(directory=static_dir, html=True), name="root")
+# Root path handler
+@app.get("/", response_class=HTMLResponse)
+async def root():
+    index_path = os.path.join(static_dir, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return HTMLResponse("<html><body><h1>Development Mode</h1></body></html>")
+
+# Optional: Catch-all route for SPA routing
+@app.get("/{full_path:path}")
+async def catch_all(full_path: str):
+    if full_path.startswith("api/"):
+        raise HTTPException(status_code=404, detail="API endpoint not found")
+    return FileResponse(os.path.join(static_dir, "index.html"))

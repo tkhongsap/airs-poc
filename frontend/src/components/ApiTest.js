@@ -9,11 +9,15 @@ const ApiTest = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Get the current hostname
-        const hostname = window.location.origin;
-        const baseUrl = `${hostname}/api`;
+        // Get the API URL based on environment
+        const baseUrl = process.env.REACT_APP_ENV === 'development'
+          ? process.env.REACT_APP_API_URL  // Use localhost in development
+          : window.location.origin;        // Use deployed URL in production
         
-        const response = await axios.get(baseUrl);
+        const apiEndpoint = `${baseUrl}/api`;
+        console.log('Fetching from:', apiEndpoint); // For debugging
+        
+        const response = await axios.get(apiEndpoint);
         setApiInfo(response.data);
       } catch (err) {
         setError('Failed to connect to the backend');

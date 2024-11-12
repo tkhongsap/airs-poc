@@ -4,6 +4,10 @@ WORKDIR /frontend
 COPY frontend/package*.json ./
 RUN npm install
 COPY frontend/ ./
+
+# Set production environment for React build
+ENV REACT_APP_ENV=production
+
 RUN npm run build
 
 # Backend build stage
