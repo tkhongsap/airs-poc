@@ -25,25 +25,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Create static directory if it doesn't exist
-static_dir = os.path.join(os.path.dirname(__file__), "..", "static")
-if not os.path.exists(static_dir):
-    os.makedirs(static_dir)
-    logger.info(f"Created static directory at {static_dir}")
-
 # Health check endpoint must be defined before static file mounting
 @app.get("/health", response_class=JSONResponse)
 async def health_check():
     return {"status": "healthy"}
 
-# Mount static files
-app.mount("/static", StaticFiles(directory=static_dir), name="static")
-
-# Serve static files from root
-app.mount("/", StaticFiles(directory=static_dir, html=True), name="root")
-
-@app.get("/api")
-async def root():
+# API endpoint must be defined before static file mounting
+@app.get("/api", response_class=JSONResponse)
+async def api_root():
     try:
         return {
             "message": "Welcome to AIRS-POC API",
@@ -61,3 +50,15 @@ async def root():
     except Exception as e:
         logger.error(f"Error in root endpoint: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+# Create static directory if it doesn't exist
+static_dir = os.path.join(os.path.dirname(__file__), "..", "static")
+if not os.path.exists(static_dir):
+    os.makedirs(static_dir)
+    logger.info(f"Created static directory at {static_dir}")
+
+# Mount static files
+app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
+# Serve static files from root
+app.mount("/", StaticFiles(directory=static_dir, html=True), name="root")

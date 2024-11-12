@@ -9,9 +9,9 @@ const ApiTest = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const baseUrl = process.env.NODE_ENV === 'production' 
-          ? '/api'
-          : 'http://localhost:8000/api';
+        // Get the current hostname
+        const hostname = window.location.origin;
+        const baseUrl = `${hostname}/api`;
         
         const response = await axios.get(baseUrl);
         setApiInfo(response.data);
@@ -54,7 +54,7 @@ const ApiTest = () => {
               {Object.entries(apiInfo.api_routes).map(([key, value]) => (
                 <li key={key}>
                   <span className="route-name">{key}:</span>
-                  <a href={`http://localhost:8000${value}`} target="_blank" rel="noopener noreferrer">
+                  <a href={value} target="_blank" rel="noopener noreferrer">
                     {value}
                   </a>
                 </li>
