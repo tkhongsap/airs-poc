@@ -20,5 +20,11 @@ COPY backend/ .
 # Expose port
 EXPOSE 8000
 
+# Create start script
+RUN echo '#!/bin/bash\n\
+PORT="${PORT:-8000}"\n\
+poetry run uvicorn app.main:app --host 0.0.0.0 --port $PORT\n'\
+> ./start.sh && chmod +x ./start.sh
+
 # Start the application
-CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "${PORT:-8000}"] 
+CMD ["./start.sh"] 
