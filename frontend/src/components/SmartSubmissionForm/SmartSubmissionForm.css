@@ -1,0 +1,40 @@
+.smart-form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.file-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.file-preview-item {
+  position: relative;
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+
+.file-preview-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.25rem;
+}
+
+.remove-file {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+} 

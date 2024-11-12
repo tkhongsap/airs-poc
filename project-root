@@ -1,0 +1,106 @@
+├── backend/
+│   ├── alembic/
+│   │   ├── env.py
+│   │   ├── README
+│   │   ├── script.py.mako
+│   │   └── versions/
+│   │       └── __init__.py
+│   ├── app/
+│   │   ├── core/
+│   │   │   ├── config.py
+│   │   │   └── __init__.py
+│   │   ├── models/
+│   │   │   ├── base.py
+│   │   │   └── __init__.py
+│   │   ├── routers/
+│   │   │   ├── issues.py
+│   │   │   ├── ai_integration.py
+│   │   │   ├── analytics.py
+│   │   │   └── __init__.py
+│   │   ├── schemas/
+│   │   │   ├── issue.py
+│   │   │   ├── ai_responses.py
+│   │   │   └── __init__.py
+│   │   ├── services/
+│   │   │   ├── ai_service.py
+│   │   │   ├── classification.py
+│   │   │   ├── priority_assignment.py
+│   │   │   ├── resolution_workflow.py
+│   │   │   └── metrics.py
+│   │   ├── utils/
+│   │   │   ├── database.py
+│   │   │   ├── websocket_manager.py
+│   │   │   └── __init__.py
+│   │   ├── main.py
+│   │   └── __init__.py
+│   ├── scripts/
+│   │   └── init_static.py
+│   ├── Dockerfile
+│   ├── pyproject.toml
+│   ├── poetry.lock
+│   └── alembic.ini
+├── frontend/
+│   ├── public/
+│   │   ├── index.html
+│   │   ├── manifest.json
+│   │   ├── favicon.ico
+│   │   ├── logo192.png
+│   │   ├── logo256.png
+│   │   └── robots.txt
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── ApiTest/
+│   │   │   │   ├── ApiTest.tsx
+│   │   │   │   ├── ApiTest.css
+│   │   │   │   └── index.ts
+│   │   │   ├── SmartSubmissionForm/
+│   │   │   │   ├── SmartSubmissionForm.tsx
+│   │   │   │   ├── SmartSubmissionForm.css
+│   │   │   │   └── index.ts
+│   │   │   ├── RealTimeDashboard/
+│   │   │   │   ├── RealTimeDashboard.tsx
+│   │   │   │   ├── RealTimeDashboard.css
+│   │   │   │   └── index.ts
+│   │   │   ├── NaturalLanguageQuery/
+│   │   │   │   ├── NaturalLanguageQuery.tsx
+│   │   │   │   ├── NaturalLanguageQuery.css
+│   │   │   │   └── index.ts
+│   │   │   └── AnalyticsDashboard/
+│   │   │       ├── AnalyticsDashboard.tsx
+│   │   │       ├── AnalyticsDashboard.css
+│   │   │       └── index.ts
+│   │   ├── pages/
+│   │   │   ├── Home.tsx
+│   │   │   ├── Issues.tsx
+│   │   │   └── __tests__/
+│   │   │       └── Home.test.tsx
+│   │   ├── services/
+│   │   │   ├── api.ts
+│   │   │   └── websocket.ts
+│   │   ├── store/
+│   │   │   ├── index.ts
+│   │   │   └── slices/
+│   │   │       ├── issuesSlice.ts
+│   │   │       └── analyticsSlice.ts
+│   │   ├── hooks/
+│   │   │   └── useAuth.ts
+│   │   ├── utils/
+│   │   │   └── validation.ts
+│   │   ├── App.tsx
+│   │   ├── App.css
+│   │   ├── index.tsx
+│   │   ├── index.css
+│   │   ├── reportWebVitals.ts
+│   │   ├── setupTests.ts
+│   │   └── react-app-env.d.ts
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── webpack.config.js
+│   └── .gitignore
+├── scripts/
+│   ├── generate_readme.py
+│   └── other_scripts.py
+├── .gitignore
+├── README.md
+└── docker-compose.yml 

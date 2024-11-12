@@ -1,15 +1,18 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { LandingPage, Dashboard, NewIssue } from './pages';
 import './App.css';
-import ApiTest from './components/ApiTest';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>AIRS-POC</h1>
-        <ApiTest />
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/new-issue" element={<NewIssue />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 
