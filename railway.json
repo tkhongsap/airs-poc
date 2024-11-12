@@ -1,0 +1,11 @@
+{
+  "build": {
+    "env": {
+      "DATABASE_URL": "your_database_url",
+      "OPENAI_API_KEY": "your_openai_api_key"
+    }
+  },
+  "start": {
+    "command": "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+  }
+} 
