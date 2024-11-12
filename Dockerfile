@@ -21,8 +21,11 @@ RUN poetry config virtualenvs.create false \
 # Copy backend code
 COPY backend/ .
 
+# Create static directory
+RUN mkdir -p static
+
 # Copy built frontend files to backend static directory
-COPY --from=frontend-build /frontend/build ./static
+COPY --from=frontend-build /frontend/build/* ./static/
 
 # Create start script
 RUN echo '#!/bin/bash\n\
