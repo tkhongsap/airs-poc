@@ -9,7 +9,11 @@ const ApiTest = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/');
+        const baseUrl = process.env.NODE_ENV === 'production' 
+          ? '/api'
+          : 'http://localhost:8000/api';
+        
+        const response = await axios.get(baseUrl);
         setApiInfo(response.data);
       } catch (err) {
         setError('Failed to connect to the backend');
